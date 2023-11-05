@@ -1,13 +1,30 @@
 {
-  "name": "clinicalmanagement",
-  "version": "1.0.0",
-  "description": "mlinical management",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "startNodemon": "nodemon index.html",
-    "start": "index.html"
-  },
-  "author": "",
-  "license": "ISC"
+
+
+"name": "tasks-management-app",
+"version": "1.0.0",
+"description": "",
+"main": "app.js",
+"type": "module",
+"scripts": {
+  "start": "node app.js",
+  "dev": "nodemon app.js -e hbs,ejs,mjs,json"
+},
+"author": "Mufakhar Adaam",
+"license": "ISC",
+"dependencies": {
+  "body-parser": "^1.20.2",
+  "cookie-parser": "^1.4.6",
+  "dotenv": "^16.3.1",
+  "ejs": "^3.1.9",
+  "express": "^4.18.2",
+  "express-session": "^1.17.3",
+  "hbs": "^4.2.0",
+  "lodash": "^4.17.21",
+  "mongoose": "^7.4.3",
+  "passport": "^0.6.0",
+  "passport-google-oauth2": "^0.2.0",
+  "passport-google-oauth20": "^2.0.0"
+}
+
 }
