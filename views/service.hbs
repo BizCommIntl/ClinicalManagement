@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Carter+One&family=Caveat&display=swap">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+    <div class="container text-start">
+            <div class="card-header d-flex justify-content-between">
+                <div class="fs-1 fw-bold ">Tasks Management <br />Application</div>
+                <div class=" d-flex flex-column justify-content-center">
+                    <div>Assignment#2</div>
+                    <h3>James Bond</h3>
+                    <div>License: #007</div>
+                </div>
+            </div>
+
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 ">
+                <div class="card">
+                    <div class="card-header ">
+                        <form action="/TaskAddNew" method="post" id="TaskAddNew">
+                            <div class="row">
+                                {{!-- <h3>Tasks List</h3> --}}
+
+
+                                {{!-- {/* ---[ Input Ref ]--- */} --}}
+                                <div class="col-12 col-md-3 ">
+                                    <div class="d-flex " style="text-align:justify">
+                                        <div class="input-group-text p-0"> <img alt="Task" src='icons8-list.gif'
+                                                width="40" height="40" onclick="setInputClear()"/></div>
+                                        <div class="form-floating w-100">
+                                            <input type="text" class="form-control  " name='ID' id="ID"
+                                                placeholder="Write Task Here" style="height: 30px;" />
+                                            <label htmlFor="Title">Any Ref.</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {{!-- {/* ---[ Input Title ]--- */} --}}
+                                <div class="col-12 col-md-5 ">
+                                    <div class="d-flex " style="text-align:justify">
+                                        <div class="form-floating w-100">
+                                            <input type="text" class="form-control  " name='Title' id="Title"
+                                                placeholder="Write Task Here" style="height: 30px;" />
+                                            <label htmlFor="Title">Enter the Desired Task</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {{!-- {/* ---[ Input Status ]--- */} --}}
+                                <div class="col-12 col-md-3 ">
+                                    <div class="d-flex " style="text-align:justify">
+                                        <div class="form-floating w-100">
+                                            <input type="text" class="form-control  " name='Status' id="Status"
+                                                placeholder="Write Task Here" style="height: 30px;" />
+                                            <label htmlFor="Status">Status</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-1 ">
+                                    <div class=" p-0">
+                                        <!-- Add button -->
+                                        <button type="submit"><img alt="Task" src='icons8-save1.gif' width="40"
+                                                height="50" /></button>
+                                    </div>
+                                </div>
+
+
+                                <div> <input type="hidden" name='_id' id="_id" /> </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="card-body ">
+
+                        {{#each TasksData}}
+                        <div class="card px-2 mb-2 shadow">
+                            <div class="row ">
+                                <div class="col-12 col-md-2 ">
+                                    {{ID}}
+                                    <input type="hidden" name='_id' value="{{_id}}" />
+                                </div>
+
+                                <div class="col-12 col-md-5 ">
+                                    {{Title}}
+                                </div>
+
+                                <div class="col-12 col-md-3 ">
+                                    {{Status}}
+                                </div>
+
+                                <div class="col-12 col-md-2  py-0   d-flex justify-content-evenly">
+                                    <img alt="Task" src='pngwingBasket.png' width="30" height="30"
+                                        onclick="setInputOption( '{{_id}}', '{{ID}}', '{{Title}}', '{{Status}}' )" />
+
+                                    {{!-- <img alt="Task" src='pngwingDustBin.png' width="30" height="30"
+                                        onclick="DelOption( '{{_id}}', '{{ID}}', '{{Title}}' )" /> --}}
+                                    <img alt="Task" src='pngwingDustBin.png' width="40" height="37"
+                                        data-bs-toggle="modal" data-bs-target="#myModal{{_id}}" />
+
+                                    {{!-- Modal Ends --}}
+                                    <div class="modal fade" id="myModal{{_id}}" tabindex="-1" role="dialog"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                            <div class="modal-content">
+
+                                                <div class="modal-header bg-light">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Are You Sure, You
+                                                        Want To DELETE This Record ?</h5>
+
+                                                    {{!-- <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button> --}}
+                                                </div>
+
+                                                <div class="modal-body d-flex justify-content-center ">
+                                                    <div class="card-body px-3 pb-3 pt-0">
+
+                                                        <div>
+                                                            <table>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <th> <span class='fs-5 fw-bolder fs- '>Reference#:
+                                                                            </span></th>
+                                                                        <td> <span class='fs- '> '{{ID}}' </span>
+                                                                        </td>
+                                                                    </tr>
+
+                                                                    <tr>
+                                                                        <th> <span class='fs-5 fw-bold  '>Task Detail:
+                                                                                &ensp;&ensp; </span></th>
+                                                                        <td> <span class='fs- '> '{{Title}}' </span>
+                                                                        </td>
+                                                                    </tr>
+
+                                                                    <tr>
+                                                                        <th> <span class='fs-5 fw-bold  '>Task Status:
+                                                                                &ensp;&ensp; </span></th>
+                                                                        <td> <span class='fs- '> '{{Status}}' </span>
+                                                                        </td>
+                                                                    </tr>
+
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {{!-- {{{description}}} --}}
+
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">
+                                                        Do Not
+                                                        Delete</button>
+                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                                                        onClick="DelOption( '{{_id}}', '{{ID}}', '{{Title}}' )">Delete
+                                                        This
+                                                        Anyway</button>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{!-- Modal Ends --}}
+                                </div>
+                            </div>
+                        </div>
+                        {{/each}}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function setInputOption(_id, ID, opt, stt) {
+                document.getElementById('_id').value = _id;
+                document.getElementById('ID').value = ID;
+                document.getElementById('Title').value = opt;
+                document.getElementById('Status').value = stt;
+            }
+
+            function setInputClear() {
+                document.getElementById('_id').value = '';
+                document.getElementById('ID').value = '';
+                document.getElementById('Title').value = '';
+                document.getElementById('Status').value = '';
+            }
+
+            function DelOption(_id, ID, opt) {
+                $.post("/TaskDelete", { "_id": _id, "_method": "post" }, function (data, status) {
+                    {{!-- alert("Data: " + data + "\nStatus: " + status); --}}
+                    alert("Record has been Deleted from Data Storage...");
+                    location.reload();
+                });
+
+            }
+
+
+
+        </script>
+
+
+
+</body>
+
+</html>
