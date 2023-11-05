@@ -323,12 +323,12 @@ app.get("/ManualEntry", async (req, res) => {
     }
 })
 
-app.get("/SimpleWorking", async (req, res) => {
+app.get("/", async (req, res) => {
     //console.log('req.session.userDetail: \n',req.session.userDetail)
         res.render("home.hbs")
 })
 
-app.get("/", async (req, res) => {
+app.get("/-withAuth", async (req, res) => {
     //console.log('req.session.userDetail: \n',req.session.userDetail)
     const userDetail = req.session.userDetail;
 
